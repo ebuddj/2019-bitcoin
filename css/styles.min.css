@@ -1,0 +1,63 @@
+/* General styles */
+.clearfix___1yHqr {
+  zoom: 1;
+}
+.clearfix___1yHqr:after {
+  clear: both;
+  content: ' ';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+.ss-terms___dMEZ6 {
+  margin: 40px auto auto auto;
+  max-width: 450px;
+}
+.meta___3gcNx {
+  color: #333;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 0 10px 40px 10px;
+}
+.clear_both___a0DL_ {
+  clear: both;
+}
+.hidden___1aMNf {
+  display: none;
+}
+.nowrap___2n1o8 {
+  white-space: nowrap;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.app___2khK2 .date___2zbrl {
+  font-size: 50px;
+  position: absolute;
+  text-align: center;
+  text-shadow: 1px 1px 1px #fff;
+  width: 100%;
+}
+.app___2khK2 .pizza_count___H22_I {
+  left: 50%;
+  margin: -50px auto auto -150px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+}
+.app___2khK2 .pizza_count___H22_I .value___2L5q8 {
+  border-radius: 100px;
+  font-size: 40px;
+  text-shadow: 1px 1px 1px #fff;
+  height: 100px;
+  line-height: 100px;
+  padding: 0 10px;
+  text-align: center;
+}
+.app___2khK2 #vis___1zjf8 {
+  clear: both;
+  height: 100%;
+  width: 100%;
+}
+
