@@ -4,6 +4,8 @@
 
 ## Bitcoin Value
 
+https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order
+
 **Sources**
 * [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
 * [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_price_history_2009_to_2019)
