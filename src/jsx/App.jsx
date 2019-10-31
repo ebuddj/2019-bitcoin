@@ -186,7 +186,7 @@ class App extends Component {
         // https://bl.ocks.org/mbostock/950642
         // http://bl.ocks.org/eesur/be2abfb3155a38be4de4
         let images = bubblesE.append('svg:image')
-          .attr('xlink:href', '/media/img/pizza_PNG7122.png')
+          .attr('xlink:href', '/media/img/pizza.png')
           .attr('x', (d) => { return -d.radius;})
           .attr('y', (d) => { return -d.radius;})
           .attr('height', (d) => { return d.radius * 2;})
