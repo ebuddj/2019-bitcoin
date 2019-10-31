@@ -1,0 +1,36 @@
+@import 'basics.less';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+.app {
+  .date {
+    font-size: 50px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 1px 1px 1px #fff;
+    width: 100%;
+  }
+  .pizza_count {
+    left: 50%;
+    margin: -50px auto auto -150px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    .value {
+      border-radius: 100px;
+      font-size: 40px;
+      text-shadow: 1px 1px 1px #fff;
+      height: 100px;
+      line-height: 100px;
+      padding: 0 10px;
+      text-align: center;
+    }
+  }
+  #vis {
+    clear: both;
+    height: 100%;
+    width: 100%;
+  }
+}
