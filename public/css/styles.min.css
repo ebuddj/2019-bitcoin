@@ -32,6 +32,18 @@ body {
   margin: 0;
   padding: 0;
 }
+.app___2khK2 p {
+  margin: 0 0 10px 0;
+}
+.app___2khK2 button {
+  appearance: none;
+  border: 1px solid #000;
+  margin: 0 2px;
+  outline: none;
+}
+.app___2khK2 button:hover {
+  background-color: #ccc;
+}
 .app___2khK2 .date___2zbrl {
   font-size: 50px;
   position: absolute;
@@ -55,7 +67,8 @@ body {
   padding: 0 10px;
   text-align: center;
 }
-.app___2khK2 #vis___1zjf8 {
+.app___2khK2 #line_chart___aZAmd,
+.app___2khK2 #pizza_chart___3rBVc {
   clear: both;
   height: 100%;
   width: 100%;
