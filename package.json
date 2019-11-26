@@ -31,8 +31,10 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "d3": "^4.13.0",
     "d3-force-reuse": "^1.0.1",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "react-chartjs-2": "^2.8.0"
   }
 }

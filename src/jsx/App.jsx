@@ -13,18 +13,17 @@ import * as d3 from 'd3';
 // https://www.npmjs.com/package/moment
 import * as moment from 'moment';
 
-// http://recharts.org
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-} from 'recharts';
+import Chart from 'chart.js';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      pizza_rendering:false
-    }
+      line_chart_rendered:false,
+      pizza_chart_rendered:false
+    };
+    this.lineChartRef = React.createRef();
   }
   componentDidMount() {
   }
@@ -40,15 +39,14 @@ class App extends Component {
   // static getDerivedStateFromError(error) {}
   // componentDidCatch() {}
   createPizzaChart() {
-    if (this.state.pizza_rendering === false) {
+    if (this.state.pizza_chart_rendered === false) {
       this.setState((state, props) => ({
-        pizza_rendering:true
+        pizza_chart_rendered:true
       }));
     }
     else {
       return false;
     }
-    console.log('start')
     const animationDuration = 0;
     const intervalDuration = 10;
     const forceStrength = 0.025;
@@ -66,7 +64,7 @@ class App extends Component {
       let bubbles = null;
       let nodes = [];
       // This is the container.
-      const svg = d3.select('#' + style.vis)
+      const svg = d3.select('#' + style.pizza_chart)
         .append('svg')
         .attr('width', width)
         .attr('height', height);
@@ -281,6 +279,85 @@ class App extends Component {
     // Load the data.
     d3.json('data/data_dollar_parity.json', display);
   }
+  createLineChart() {
+    if (this.state.line_chart_rendered === false) {
+      this.setState((state, props) => ({
+        line_chart_rendered:true
+      }));
+    }
+    else {
+      return false;
+    }
+
+    d3.json('data/data.json', display);
+
+    let self = this;
+    function display(error, data) {
+      if (error) {
+        // console.log(error)
+      }
+
+      data.price = data.price.map((values) => {
+        return {
+          timestamp:values[0],
+          value:values[1]
+        }
+      });
+      let config = {
+        type: 'line',
+        data: {
+          labels: [moment(1279238400000).format('YYYY-MM-DD')],
+          datasets: [{
+            label: 'Bitcoin value',
+            backgroundColor: '#f00',
+            borderColor: '#f00',
+            data: [0],
+            radius: 0,
+            fill: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          title: {
+            display: false,
+            text: ''
+          },
+          tooltips: {
+            enabled: false,
+          },
+          legend: {
+            display: false
+          },
+          hover: {
+            enabled: false,
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              scaleLabel: {
+                display: false,
+                labelString: 'day'
+              }
+            }],
+            yAxes: [{
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Value in dollars'
+              }
+            }]
+          }
+        }
+      };
+      self.lineChart = new Chart(self.lineChartRef.current.getContext('2d'), config);
+
+      let interval = setInterval(() => {
+        config.data.labels.push(moment(data.price.shift().timestamp).format('YYYY-MM-DD'));
+        config.data.datasets[0].data.push(data.price.shift().value);
+        self.lineChart.update();
+      }, 50);
+    }
+  }
   render() {
     return (
       <div className={style.app}>
@@ -295,7 +372,8 @@ class App extends Component {
             {this.state.pizza_count}
           </div>
         </div>
-        <div id={style.vis}></div>
+        <div id={style.pizza_chart}></div>
+        <canvas id={style.line_chart} ref={this.lineChartRef}></canvas>
       </div>
     );
   }
