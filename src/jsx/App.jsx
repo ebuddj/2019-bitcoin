@@ -13,6 +13,7 @@ import * as d3 from 'd3';
 // https://www.npmjs.com/package/moment
 import * as moment from 'moment';
 
+// https://www.chartjs.org/
 import Chart from 'chart.js';
 
 class App extends Component {
@@ -343,19 +344,22 @@ class App extends Component {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: 'Value in dollars'
+                labelString: 'Bitcoin value in dollars'
               }
             }]
           }
         }
       };
-      self.lineChart = new Chart(self.lineChartRef.current.getContext('2d'), config);
+      let line_chart = new Chart(self.lineChartRef.current.getContext('2d'), config);
 
       let interval = setInterval(() => {
         config.data.labels.push(moment(data.price.shift().timestamp).format('YYYY-MM-DD'));
         config.data.datasets[0].data.push(data.price.shift().value);
-        self.lineChart.update();
-      }, 50);
+        line_chart.update();
+        if (data.price.length < 1) {
+          clearInterval(interval);
+        }
+      }, 80);
     }
   }
   render() {
