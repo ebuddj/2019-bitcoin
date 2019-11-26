@@ -7,19 +7,26 @@ import style from './../styles/styles.less';
 // Live Demo: http://vallandingham.me/bubble_chart_v4/#
 // Source Code: https://github.com/vlandham/bubble_chart_v4
 
+// https://d3js.org/
 import * as d3 from 'd3';
+
+// https://www.npmjs.com/package/moment
 import * as moment from 'moment';
+
+// http://recharts.org
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      pizza_count:0
+      pizza_rendering:false
     }
   }
   componentDidMount() {
-    this.createChart();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
 
@@ -32,7 +39,16 @@ class App extends Component {
   // getSnapshotBeforeUpdate(prevProps, prevState) {}
   // static getDerivedStateFromError(error) {}
   // componentDidCatch() {}
-  createChart() {
+  createPizzaChart() {
+    if (this.state.pizza_rendering === false) {
+      this.setState((state, props) => ({
+        pizza_rendering:true
+      }));
+    }
+    else {
+      return false;
+    }
+    console.log('start')
     const animationDuration = 0;
     const intervalDuration = 10;
     const forceStrength = 0.025;
@@ -78,7 +94,9 @@ class App extends Component {
        * These x and y values are modified by the force simulation.
        */
       function ticked() {
-        bubbles.attr('transform', (d) => { return 'translate(' + d.x + ',' + d.y + ')'; });
+        bubbles.attr('transform', (d) => {
+          return 'translate(' + d.x + ',' + d.y + ')';
+        });
       }
 
       // Charge function that is called for each node.
@@ -266,6 +284,11 @@ class App extends Component {
   render() {
     return (
       <div className={style.app}>
+        <div className={style.selection_container}>
+          <p>You can choose either the pizza chart or line chart.</p>
+          <button onClick={() => this.createPizzaChart()}>Pizza chart</button>
+          <button onClick={() => this.createLineChart()}>Line chart</button>
+        </div>
         <div className={style.date}>{this.state.date}</div>
         <div className={style.pizza_count}>
           <div className={style.value}>

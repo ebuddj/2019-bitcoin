@@ -4,7 +4,17 @@
 
 ## Bitcoin Value
 
-https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order
+This project consists of two different visualizations based on [the Bitcoin value over time](https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order). First one is a more experimental force layout visualization showing the value of Bitcoin in the amount of pizzas. Second one is a more traditional line chart visualization. 
+
+One chooses the layout from the top left corner.
+
+### Pizza chart
+
+This data shows the value of Bitcoin since 2013-02-12.
+
+### Line chart
+
+This data shows the value of Bitcoin since Bitcoin was introduced.
 
 **Sources**
 * [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
