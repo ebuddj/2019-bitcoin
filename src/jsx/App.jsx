@@ -278,7 +278,7 @@ class App extends Component {
     }
 
     // Load the data.
-    d3.json('data/data_dollar_parity.json', display);
+    d3.json('./data/data_dollar_parity.json', display);
   }
   createLineChart() {
     if (this.state.line_chart_rendered === false) {
@@ -290,7 +290,7 @@ class App extends Component {
       return false;
     }
 
-    d3.json('data/data.json', display);
+    d3.json('./data/data.json', display);
 
     let self = this;
     function display(error, data) {
