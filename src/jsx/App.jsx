@@ -28,7 +28,9 @@ class App extends Component {
     this.lineChartRef = React.createRef();
   }
   componentDidMount() {
-    this.createLineChart();
+    // Uncomment to run automatically either one.
+    // this.createLineChart();
+    // this.createPizzaChart();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
 
@@ -372,7 +374,7 @@ class App extends Component {
       }, 80);
       let events = [];
       data.events.forEach(data => {
-        events.push(<div>{moment(data.x).format('YYYY-MM-DD')} {data.text}</div>);
+        events.push(<div key={data.x}>{moment(data.x).format('YYYY-MM-DD')} {data.text}</div>);
       });
       self.setState((state, props) => ({
         events:events
@@ -382,7 +384,7 @@ class App extends Component {
   render() {
     return (
       <div className={style.app}>
-        <div className={style.selection_container} style={{display:'none'}}>
+        <div className={style.selection_container} style={(this.state.pizza_chart_rendered === true || this.state.line_chart_rendered === true) ? {display:'none'} : {display:'block'}}>
           <p>You can choose either the pizza chart or line chart.</p>
           <button onClick={() => this.createPizzaChart()}>Pizza chart</button>
           <button onClick={() => this.createLineChart()}>Line chart</button>
@@ -393,10 +395,17 @@ class App extends Component {
             {this.state.pizza_count}
           </div>
         </div>
-        <div id={style.pizza_chart}></div>
-        <div className={style.line_chart_meta}><div>{moment(this.state.timestamp).format('MMMM YYYY')}</div><div>${this.state.value.toFixed(2)}</div></div>
-        <canvas id={style.line_chart} ref={this.lineChartRef}></canvas>
-        <div className={style.events}>{this.state.events}</div>
+        <div id={style.pizza_chart} style={(this.state.pizza_chart_rendered === true) ? {display:'block'} : {display:'none'}}></div>
+        <div style={(this.state.line_chart_rendered === true) ? {display:'block'} : {display:'none'}}>
+          <div style={{position:'relative'}}>
+            <div className={style.line_chart_meta}>
+              <div>{moment(this.state.timestamp).format('MMMM YYYY')}</div>
+              <div>${this.state.value.toFixed(2)}</div>
+            </div>
+            <canvas id={style.line_chart} ref={this.lineChartRef}></canvas>
+          </div>
+          <div className={style.events}>{this.state.events}</div>
+        </div>
       </div>
     );
   }
