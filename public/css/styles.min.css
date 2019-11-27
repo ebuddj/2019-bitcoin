@@ -73,4 +73,18 @@ body {
   height: 100%;
   width: 100%;
 }
+.app___2khK2 #line_chart___aZAmd {
+  padding-top: 5px;
+}
+.app___2khK2 .line_chart_meta___p3fCp {
+  font-family: verdana;
+  font-size: 36px;
+  position: absolute;
+  right: 30px;
+  text-align: right;
+  top: 30px;
+}
+.app___2khK2 .events___8z8eT {
+  margin-top: 40px;
+}
 
