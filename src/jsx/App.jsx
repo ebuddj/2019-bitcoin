@@ -305,20 +305,24 @@ class App extends Component {
         }
       });
       let config = {
-        type: 'line',
         data: {
-          labels: [moment(1279238400000).format('YYYY-MM-DD')],
           datasets: [{
-            label: 'Bitcoin value',
-            backgroundColor: '#f00',
-            borderColor: '#f00',
+            backgroundColor: 'rgba(231, 76, 60, 0.7)',
+            borderColor: 'rgba(192, 57, 43, 1.0)',
             data: [0],
-            radius: 0,
-            fill: false,
-          }]
+            fill: true,
+            label: 'Bitcoin value',
+            radius: 0
+          }],
+          labels: [moment(1279238400000).format('YYYY-MM-DD')]
         },
         options: {
-          responsive: true,
+          hover: {
+            enabled: false,
+          },
+          legend: {
+            display: false
+          },
           title: {
             display: false,
             text: ''
@@ -326,12 +330,7 @@ class App extends Component {
           tooltips: {
             enabled: false,
           },
-          legend: {
-            display: false
-          },
-          hover: {
-            enabled: false,
-          },
+          responsive: true,
           scales: {
             xAxes: [{
               display: true,
@@ -348,7 +347,8 @@ class App extends Component {
               }
             }]
           }
-        }
+        },
+        type: 'line'
       };
       let line_chart = new Chart(self.lineChartRef.current.getContext('2d'), config);
 
