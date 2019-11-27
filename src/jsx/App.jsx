@@ -284,7 +284,7 @@ class App extends Component {
     // Load the data.
     d3.json('./data/data_dollar_parity.json', display);
   }
-  createLineChart() {
+  createLineChart(ratio) {
     if (this.state.line_chart_rendered === false) {
       this.setState((state, props) => ({
         line_chart_rendered:true
@@ -335,7 +335,7 @@ class App extends Component {
           tooltips:{
             enabled:false,
           },
-          aspectRatio:1,
+          aspectRatio:ratio,
           responsive:true,
           scales:{
             xAxes:[{
@@ -371,7 +371,7 @@ class App extends Component {
         if (data.price.length < 1) {
           clearInterval(interval);
         }
-      }, 80);
+      }, 50);
       let events = [];
       data.events.forEach(data => {
         events.push(<div key={data.x}>{moment(data.x).format('YYYY-MM-DD')} {data.text}</div>);
@@ -387,7 +387,8 @@ class App extends Component {
         <div className={style.selection_container} style={(this.state.pizza_chart_rendered === true || this.state.line_chart_rendered === true) ? {display:'none'} : {display:'block'}}>
           <p>You can choose either the pizza chart or line chart.</p>
           <button onClick={() => this.createPizzaChart()}>Pizza chart</button>
-          <button onClick={() => this.createLineChart()}>Line chart</button>
+          <button onClick={() => this.createLineChart(16/9)}>Line chart 16:9</button>
+          <button onClick={() => this.createLineChart(1)}>Line chart 1:1</button>
         </div>
         <div className={style.date}>{this.state.date}</div>
         <div className={style.pizza_count}>
