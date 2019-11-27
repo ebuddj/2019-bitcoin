@@ -3,9 +3,9 @@ import style from './../styles/styles.less';
 
 // https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order
 
-// Blog Post: https://vallandingham.me/bubble_charts_with_d3v4.html
-// Live Demo: http://vallandingham.me/bubble_chart_v4/#
-// Source Code: https://github.com/vlandham/bubble_chart_v4
+// Blog Post:https://vallandingham.me/bubble_charts_with_d3v4.html
+// Live Demo:http://vallandingham.me/bubble_chart_v4/#
+// Source Code:https://github.com/vlandham/bubble_chart_v4
 
 // https://d3js.org/
 import * as d3 from 'd3';
@@ -22,11 +22,13 @@ class App extends Component {
 
     this.state = {
       line_chart_rendered:false,
-      pizza_chart_rendered:false
+      pizza_chart_rendered:false,
+      value:0
     };
     this.lineChartRef = React.createRef();
   }
   componentDidMount() {
+    this.createLineChart();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
 
@@ -59,7 +61,7 @@ class App extends Component {
 
       // Locations to move bubbles towards, depending
       // on which view mode is selected.
-      const center = { x: (width / 2) - 30, y: (height / 2) - 30 };
+      const center = { x:(width / 2) - 30, y:(height / 2) - 30 };
 
       // These will be set in create_nodes and create_vis
       let bubbles = null;
@@ -129,7 +131,7 @@ class App extends Component {
        * array for each element in the rawData input.
        */
       // Sizes bubbles based on area.
-      // @v4: new flattened scale names.
+      // @v4:new flattened scale names.
       let radiusScale = d3.scaleLog()
         .domain([2,1559])
         .range([120,20]);
@@ -152,9 +154,9 @@ class App extends Component {
           if (!(nodes.find((node) => {return node.id === i}))) {
             nodes.push({
               id:i,
-              radius: radiusScale(pizza_count),
-              x: Math.random() * width,
-              y: Math.random() * height
+              radius:radiusScale(pizza_count),
+              x:Math.random() * width,
+              y:Math.random() * height
             });
           }
         }
@@ -305,67 +307,82 @@ class App extends Component {
         }
       });
       let config = {
-        data: {
-          datasets: [{
-            backgroundColor: 'rgba(231, 76, 60, 0.7)',
-            borderColor: 'rgba(192, 57, 43, 1.0)',
-            data: [0],
-            fill: true,
-            label: 'Bitcoin value',
-            radius: 0
+        data:{
+          datasets:[{
+            backgroundColor:'rgba(231, 76, 60, 0.7)',
+            borderColor:'rgba(192, 57, 43, 1.0)',
+            borderWidth:2,
+            data:[0],
+            fill:true,
+            label:'Bitcoin value',
+            radius:0
           }],
-          labels: [moment(1279238400000).format('YYYY-MM-DD')]
+          labels:[moment(1279238400000).format('YYYY-MM-DD')]
         },
-        options: {
-          hover: {
-            enabled: false,
+        options:{
+          hover:{
+            enabled:false,
           },
-          legend: {
-            display: false
+          legend:{
+            display:false
           },
-          title: {
-            display: false,
-            text: ''
+          title:{
+            display:false,
+            text:''
           },
-          tooltips: {
-            enabled: false,
+          tooltips:{
+            enabled:false,
           },
-          responsive: true,
-          scales: {
-            xAxes: [{
-              display: true,
-              scaleLabel: {
-                display: false,
-                labelString: 'day'
+          aspectRatio:1,
+          responsive:true,
+          scales:{
+            xAxes:[{
+              display:true,
+              scaleLabel:{
+                display:false,
+                labelString:'day'
               }
             }],
-            yAxes: [{
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Bitcoin value in dollars'
+            yAxes:[{
+              display:true,
+              scaleLabel:{
+                display:true,
+                labelString:'Bitcoin value in dollars'
               }
             }]
           }
         },
-        type: 'line'
+        type:'line'
       };
-      let line_chart = new Chart(self.lineChartRef.current.getContext('2d'), config);
+      let ctx = self.lineChartRef.current.getContext('2d');
+      let line_chart = new Chart(ctx, config);
 
       let interval = setInterval(() => {
-        config.data.labels.push(moment(data.price.shift().timestamp).format('YYYY-MM-DD'));
-        config.data.datasets[0].data.push(data.price.shift().value);
+        let price = data.price.shift();
+        self.setState((state, props) => ({
+          timestamp:price.timestamp,
+          value:price.value
+        }));
+        config.data.labels.push(moment(price.timestamp).format('YYYY-MM-DD'));
+        config.data.datasets[0].data.push(price.value);
         line_chart.update();
         if (data.price.length < 1) {
           clearInterval(interval);
         }
       }, 80);
+      let events = [];
+      data.events.forEach(data => {
+        events.push(<div>{moment(data.x).format('YYYY-MM-DD')} {data.text}</div>);
+      });
+      self.setState((state, props) => ({
+        events:events
+      }));
     }
   }
   render() {
     return (
       <div className={style.app}>
-        <div className={style.selection_container}>
+        <div className={style.selection_container} style={{display:'none'}}>
           <p>You can choose either the pizza chart or line chart.</p>
           <button onClick={() => this.createPizzaChart()}>Pizza chart</button>
           <button onClick={() => this.createLineChart()}>Line chart</button>
@@ -377,7 +394,9 @@ class App extends Component {
           </div>
         </div>
         <div id={style.pizza_chart}></div>
+        <div className={style.line_chart_meta}><div>{moment(this.state.timestamp).format('MMMM YYYY')}</div><div>${this.state.value.toFixed(2)}</div></div>
         <canvas id={style.line_chart} ref={this.lineChartRef}></canvas>
+        <div className={style.events}>{this.state.events}</div>
       </div>
     );
   }
