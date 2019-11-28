@@ -384,14 +384,16 @@ class App extends Component {
           options.data.datasets[0].data.push(price.value);
           line_chart.update();
 
-          if (data.price.length < 1 && self.state.line_chart_rendered_16_9 === false) {
+          if (data.price.length < 1) {
             clearInterval(interval);
             setTimeout(() => {
               line_chart.destroy();
-              self.setState((state, props) => ({
-                line_chart_rendered_16_9:true,
-                line_chart_show_meta:false
-              }), () => self.createLineChart(1));
+              if (self.state.line_chart_rendered_16_9 === false) {
+                self.setState((state, props) => ({
+                  line_chart_rendered_16_9:true,
+                  line_chart_show_meta:false
+                }), () => self.createLineChart(1));
+              }
             }, 5000);
           }
         }, 30);
