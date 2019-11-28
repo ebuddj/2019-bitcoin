@@ -394,6 +394,11 @@ class App extends Component {
                   line_chart_show_meta:false
                 }), () => self.createLineChart(1));
               }
+              else {
+                self.setState((state, props) => ({
+                  line_chart_show_meta:false
+                }));
+              }
             }, 5000);
           }
         }, 30);
