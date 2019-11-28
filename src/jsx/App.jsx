@@ -25,11 +25,13 @@ class App extends Component {
       pizza_chart_rendered:false,
       value:0
     };
+
+    // We need a ref for chart.js.
     this.lineChartRef = React.createRef();
   }
   componentDidMount() {
     // Uncomment to run automatically either one.
-    // this.createLineChart();
+    this.createLineChart(16/9);
     // this.createPizzaChart();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -44,6 +46,7 @@ class App extends Component {
   // static getDerivedStateFromError(error) {}
   // componentDidCatch() {}
   createPizzaChart() {
+    // Check if chart has been rendered and fail if it is.
     if (this.state.pizza_chart_rendered === false) {
       this.setState((state, props) => ({
         pizza_chart_rendered:true
@@ -52,10 +55,13 @@ class App extends Component {
     else {
       return false;
     }
+
+    // Define constants.
     const animationDuration = 0;
     const intervalDuration = 10;
     const forceStrength = 0.025;
     const self = this;
+
     function bubbleChart() {
       // Constants for sizing
       const width = window.innerWidth;
@@ -252,6 +258,7 @@ class App extends Component {
     function display(error, data) {
       if (error) {
         // console.log(error)
+        return false;
       }
       let pizzas = data.price.map((d) => {
         return parseInt(((d[1]) / 25) * 2);
@@ -285,6 +292,7 @@ class App extends Component {
     d3.json('./data/data_dollar_parity.json', display);
   }
   createLineChart(ratio) {
+    // Check if chart has been rendered and fail if it is.
     if (this.state.line_chart_rendered === false) {
       this.setState((state, props) => ({
         line_chart_rendered:true
@@ -294,12 +302,13 @@ class App extends Component {
       return false;
     }
 
-    d3.json('./data/data.json', display);
+    // Define constants.
+    const self = this;
 
-    let self = this;
     function display(error, data) {
       if (error) {
         // console.log(error)
+        return false;
       }
 
       data.price = data.price.map((values) => {
@@ -308,7 +317,9 @@ class App extends Component {
           value:values[1]
         }
       });
-      let config = {
+
+      // Define options.
+      let options = {
         data:{
           datasets:[{
             backgroundColor:'rgba(231, 76, 60, 0.7)',
@@ -356,22 +367,12 @@ class App extends Component {
         },
         type:'line'
       };
-      let ctx = self.lineChartRef.current.getContext('2d');
-      let line_chart = new Chart(ctx, config);
 
-      let interval = setInterval(() => {
-        let price = data.price.shift();
-        self.setState((state, props) => ({
-          timestamp:price.timestamp,
-          value:price.value
-        }));
-        config.data.labels.push(moment(price.timestamp).format('YYYY-MM-DD'));
-        config.data.datasets[0].data.push(price.value);
-        line_chart.update();
-        if (data.price.length < 1) {
-          clearInterval(interval);
-        }
-      }, 50);
+      // Get context from ref.
+      let ctx = self.lineChartRef.current.getContext('2d');
+      let line_chart = new Chart(ctx, options);
+
+      // Print events (hidden with css).
       let events = [];
       data.events.forEach(data => {
         events.push(<div key={data.x}>{moment(data.x).format('YYYY-MM-DD')} {data.text}</div>);
@@ -379,7 +380,25 @@ class App extends Component {
       self.setState((state, props) => ({
         events:events
       }));
+
+      // Update chart.
+      let interval = setInterval(() => {
+        let price = data.price.shift();
+        self.setState((state, props) => ({
+          timestamp:price.timestamp,
+          value:price.value
+        }));
+        options.data.labels.push(moment(price.timestamp).format('YYYY-MM-DD'));
+        options.data.datasets[0].data.push(price.value);
+        line_chart.update();
+        if (data.price.length < 1) {
+          clearInterval(interval);
+        }
+      }, 40);
     }
+
+    // Load the data.
+    d3.json('./data/data.json', display);
   }
   render() {
     return (
