@@ -22,7 +22,9 @@ class App extends Component {
 
     this.state = {
       line_chart_rendered:false,
+      line_chart_rendered_16_9:false,
       pizza_chart_rendered:false,
+      line_chart_show_meta:false,
       value:0
     };
 
@@ -31,7 +33,10 @@ class App extends Component {
   }
   componentDidMount() {
     // Uncomment to run automatically either one.
-    this.createLineChart(16/9);
+    setTimeout(() => {
+      this.createLineChart(16/9);
+    }, 5000);
+    // this.createLineChart(1);
     // this.createPizzaChart();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -299,12 +304,11 @@ class App extends Component {
       }));
     }
     else {
-      return false;
     }
 
     // Define constants.
     const self = this;
-
+    let line_chart = false;
     function display(error, data) {
       if (error) {
         // console.log(error)
@@ -322,8 +326,8 @@ class App extends Component {
       let options = {
         data:{
           datasets:[{
-            backgroundColor:'rgba(231, 76, 60, 0.7)',
-            borderColor:'rgba(192, 57, 43, 1.0)',
+            backgroundColor:'rgba(247, 147, 26, 0.7)',
+            borderColor:'#f7931a',
             borderWidth:2,
             data:[0],
             fill:true,
@@ -368,42 +372,65 @@ class App extends Component {
         type:'line'
       };
 
+      function updateChart() {
+        // Update chart.
+        let interval = setInterval(() => {
+          let price = data.price.shift();
+          self.setState((state, props) => ({
+            timestamp:price.timestamp,
+            value:price.value
+          }));
+          options.data.labels.push(moment(price.timestamp).format('YYYY-MM-DD'));
+          options.data.datasets[0].data.push(price.value);
+          line_chart.update();
+
+          if (data.price.length < 1 && self.state.line_chart_rendered_16_9 === false) {
+            clearInterval(interval);
+            setTimeout(() => {
+              line_chart.destroy();
+              self.setState((state, props) => ({
+                line_chart_rendered_16_9:true,
+                line_chart_show_meta:false
+              }), () => self.createLineChart(1));
+            }, 5000);
+          }
+        }, 30);
+      }
+
       // Get context from ref.
       let ctx = self.lineChartRef.current.getContext('2d');
-      let line_chart = new Chart(ctx, options);
-
-      // Print events (hidden with css).
-      let events = [];
-      data.events.forEach(data => {
-        events.push(<div key={data.x}>{moment(data.x).format('YYYY-MM-DD')} {data.text}</div>);
-      });
-      self.setState((state, props) => ({
-        events:events
-      }));
-
-      // Update chart.
-      let interval = setInterval(() => {
-        let price = data.price.shift();
+      if (self.state.line_chart_rendered_16_9 === true) {
+        setTimeout(() => {
+          line_chart = new Chart(ctx, options);
+          line_chart.canvas.parentNode.style.height = (window.innerHeight - 20) + 'px';
+          line_chart.canvas.parentNode.style.width = (window.innerHeight - 20) + 'px';
+          self.setState((state, props) => ({
+            line_chart_show_meta:true
+          }));
+          updateChart();
+        }, 5000);
+      }
+      else {
+        line_chart = new Chart(ctx, options);
+        // Print events (hidden with css).
+        let events = [];
+        data.events.forEach(data => {
+          events.push(<div key={data.x}>{moment(data.x).format('YYYY-MM-DD')} {data.text}</div>);
+        });
         self.setState((state, props) => ({
-          timestamp:price.timestamp,
-          value:price.value
+          events:events,
+          line_chart_show_meta:true
         }));
-        options.data.labels.push(moment(price.timestamp).format('YYYY-MM-DD'));
-        options.data.datasets[0].data.push(price.value);
-        line_chart.update();
-        if (data.price.length < 1) {
-          clearInterval(interval);
-        }
-      }, 40);
+        updateChart();
+      }
     }
-
     // Load the data.
     d3.json('./data/data.json', display);
   }
   render() {
     return (
       <div className={style.app}>
-        <div className={style.selection_container} style={(this.state.pizza_chart_rendered === true || this.state.line_chart_rendered === true) ? {display:'none'} : {display:'block'}}>
+        <div className={style.selection_container} style={(this.state.pizza_chart_rendered === true || this.state.line_chart_rendered === true) ? {display:'none'} : {display:'none'}}>
           <p>You can choose either the pizza chart or line chart.</p>
           <button onClick={() => this.createPizzaChart()}>Pizza chart</button>
           <button onClick={() => this.createLineChart(16/9)}>Line chart 16:9</button>
@@ -417,8 +444,8 @@ class App extends Component {
         </div>
         <div id={style.pizza_chart} style={(this.state.pizza_chart_rendered === true) ? {display:'block'} : {display:'none'}}></div>
         <div style={(this.state.line_chart_rendered === true) ? {display:'block'} : {display:'none'}}>
-          <div style={{position:'relative'}}>
-            <div className={style.line_chart_meta}>
+          <div style={{position:'relative', margin:'auto auto'}}>
+            <div className={style.line_chart_meta} style={(this.state.line_chart_show_meta === true) ? {display:'block'} : {display:'none'}}>
               <div>{moment(this.state.timestamp).format('MMMM YYYY')}</div>
               <div>${this.state.value.toFixed(2)}</div>
             </div>
