@@ -151,6 +151,9 @@ This data shows the value of Bitcoin since Bitcoin was introduced. This is a gro
 * [News Exchange](https://news-exchange.ebu.ch/item_detail/526f7da5a4979072d9b81df87f2f66c3/2019_21057414)
 * [Social Newswire](https://www.evnsocialnewswire.ch/editors-picks/data-visualisation-of-bitcoin-value-skyrocketing-over-the-course-of-its-existence-animation/)
 
+**Used by**
+* [DW/Germany](https://www.facebook.com/watch/?v=744776129264447)
+
 **Sources**
 * [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
 * [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_price_history_2009_to_2019)
