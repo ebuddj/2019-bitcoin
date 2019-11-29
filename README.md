@@ -8,7 +8,7 @@ Bitcoin is a cryptocurrency. It is a decentralized digital currency without a ce
 
 Over this time, the Bitcoin value has skyrocketed from just US$0.06 to US$7531.83. At its peak in December 2017, it traded at just below US$20,000.
 
-This project consists of *two different visualizations* based on [the Bitcoin value over time](https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order). *First one* is a more experimental force layout visualization showing the value of Bitcoin in the amount of pizzas. *Second and default one* is a more traditional line chart visualization.
+This project consists of **two different visualizations** based on [the Bitcoin value over time](https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order). **First one** is a more experimental force layout visualization showing the value of Bitcoin in the amount of pizzas. **Second and default one** is a more traditional line chart visualization.
 
 ### Major events
 
@@ -141,7 +141,7 @@ This project consists of *two different visualizations* based on [the Bitcoin va
 
 ### Experimental pizza chart
 
-This data shows the value of Bitcoin since 2013-02-12. This is a force layout visualisation.
+This data shows the value of Bitcoin from 2013-02-12. This is a force layout visualisation.
 
 ### Default line chart
 
@@ -155,7 +155,7 @@ This data shows the value of Bitcoin since Bitcoin was introduced. This is a gro
 * [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_price_history_2009_to_2019)
 * [Wikipedia](https://en.wikipedia.org/wiki/Bitcoin)
 * [99Bitcoins](https://99bitcoins.com/bitcoin/historical-price/)  
-  * Data is in the `chartData` variable
+  * Data is in the `chartData` variable accessable via browser's console
 
 ## How to use
 
