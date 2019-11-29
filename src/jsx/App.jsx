@@ -33,9 +33,9 @@ class App extends Component {
   }
   componentDidMount() {
     // Uncomment to run automatically either one.
-    setTimeout(() => {
-      this.createLineChart(16/9);
-    }, 5000);
+    // setTimeout(() => {
+      // this.createLineChart(16/9);
+    // }, 5000);
     // this.createLineChart(1);
     // this.createPizzaChart();
   }
@@ -389,10 +389,10 @@ class App extends Component {
             setTimeout(() => {
               line_chart.destroy();
               if (self.state.line_chart_rendered_16_9 === false) {
-                self.setState((state, props) => ({
-                  line_chart_rendered_16_9:true,
-                  line_chart_show_meta:false
-                }), () => self.createLineChart(1));
+                // self.setState((state, props) => ({
+                //   line_chart_rendered_16_9:true,
+                //   line_chart_show_meta:false
+                // }), () => self.createLineChart(1));
               }
               else {
                 self.setState((state, props) => ({
@@ -407,15 +407,15 @@ class App extends Component {
       // Get context from ref.
       let ctx = self.lineChartRef.current.getContext('2d');
       if (self.state.line_chart_rendered_16_9 === true) {
-        setTimeout(() => {
-          line_chart = new Chart(ctx, options);
-          line_chart.canvas.parentNode.style.height = (window.innerHeight - 20) + 'px';
-          line_chart.canvas.parentNode.style.width = (window.innerHeight - 20) + 'px';
-          self.setState((state, props) => ({
-            line_chart_show_meta:true
-          }));
-          updateChart();
-        }, 5000);
+        // setTimeout(() => {
+        //   line_chart = new Chart(ctx, options);
+        //   line_chart.canvas.parentNode.style.height = (window.innerHeight - 20) + 'px';
+        //   line_chart.canvas.parentNode.style.width = (window.innerHeight - 20) + 'px';
+        //   self.setState((state, props) => ({
+        //     line_chart_show_meta:true
+        //   }));
+        //   updateChart();
+        // }, 5000);
       }
       else {
         line_chart = new Chart(ctx, options);
@@ -437,7 +437,7 @@ class App extends Component {
   render() {
     return (
       <div className={style.app}>
-        <div className={style.selection_container} style={(this.state.pizza_chart_rendered === true || this.state.line_chart_rendered === true) ? {display:'none'} : {display:'none'}}>
+        <div className={style.selection_container} style={(this.state.pizza_chart_rendered === true || this.state.line_chart_rendered === true) ? {display:'none'} : {display:'block'}}>
           <p>You can choose either the pizza chart or line chart.</p>
           <button onClick={() => this.createPizzaChart()}>Pizza chart</button>
           <button onClick={() => this.createLineChart(16/9)}>Line chart 16:9</button>

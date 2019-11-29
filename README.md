@@ -6,7 +6,9 @@
 
 Bitcoin is a cryptocurrency. It is a decentralized digital currency without a central bank or single administrator that can be sent from user to user on the peer-to-peer bitcoin network without the need for intermediaries. On 3 January 2009, the bitcoin network was created when Nakamoto mined the first block of the chain, known as the genesis block. In 2010, the first known commercial transaction using bitcoin occurred when programmer Laszlo Hanyecz bought two Papa John's pizzas for ₿10,000. 
 
-This project consists of two different visualizations based on [the Bitcoin value over time](https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order). First one is a more experimental force layout visualization showing the value of Bitcoin in the amount of pizzas. Second and default one is a more traditional line chart visualization.
+Over this time, the Bitcoin value has skyrocketed from just US$0.06 to US$7531.83. At its peak in December 2017, it traded at just below US$20,000.
+
+This project consists of *two different visualizations* based on [the Bitcoin value over time](https://www.investopedia.com/news/bitcoin-pizza-day-celebrating-20-million-pizza-order). *First one* is a more experimental force layout visualization showing the value of Bitcoin in the amount of pizzas. *Second and default one* is a more traditional line chart visualization.
 
 ### Major events
 
@@ -137,19 +139,23 @@ This project consists of two different visualizations based on [the Bitcoin valu
 * 2019-06-13 Bakkt names launch date for Bitcoin Futures Testing
 * 2019-06-18 Bitcoin Price Trades Flat on Facebook Libra Blockchain Launch
 
-### Pizza chart
+### Experimental pizza chart
 
-This data shows the value of Bitcoin since 2013-02-12.
+This data shows the value of Bitcoin since 2013-02-12. This is a force layout visualisation.
 
-### Line chart
+### Default line chart
 
-This data shows the value of Bitcoin since Bitcoin was introduced.
+This data shows the value of Bitcoin since Bitcoin was introduced. This is a growing line chart.
+
+**Links**
+* [News Exchange](https://news-exchange.ebu.ch/item_detail/867cf13a7fb33bbe0676631a3fde0ac2/2019_21040500)
 
 **Sources**
 * [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
 * [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_price_history_2009_to_2019)
-* [99Bitcoins](https://99bitcoins.com/bitcoin/historical-price/) chartData
 * [Wikipedia](https://en.wikipedia.org/wiki/Bitcoin)
+* [99Bitcoins](https://99bitcoins.com/bitcoin/historical-price/)
+** Data is in the `chartData` variable
 
 ## How to use
 
