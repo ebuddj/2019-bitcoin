@@ -148,7 +148,8 @@ This data shows the value of Bitcoin from 2013-02-12. This is a force layout vis
 This data shows the value of Bitcoin since Bitcoin was introduced. This is a growing line chart.
 
 **Links**
-* [News Exchange](https://news-exchange.ebu.ch/item_detail/867cf13a7fb33bbe0676631a3fde0ac2/2019_21040500)
+* [News Exchange](https://news-exchange.ebu.ch/item_detail/526f7da5a4979072d9b81df87f2f66c3/2019_21057414)
+* [Social Newswire](https://www.evnsocialnewswire.ch/editors-picks/data-visualisation-of-bitcoin-value-skyrocketing-over-the-course-of-its-existence-animation/)
 
 **Sources**
 * [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
