@@ -154,8 +154,8 @@ This data shows the value of Bitcoin since Bitcoin was introduced. This is a gro
 * [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
 * [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_price_history_2009_to_2019)
 * [Wikipedia](https://en.wikipedia.org/wiki/Bitcoin)
-* [99Bitcoins](https://99bitcoins.com/bitcoin/historical-price/)
-** Data is in the `chartData` variable
+* [99Bitcoins](https://99bitcoins.com/bitcoin/historical-price/)  
+  * Data is in the `chartData` variable
 
 ## How to use
 
