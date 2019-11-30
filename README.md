@@ -153,6 +153,8 @@ This data shows the value of Bitcoin since Bitcoin was introduced. This is a gro
 
 **Used by**
 * [DW/Germany](https://www.facebook.com/watch/?v=744776129264447)
+* [TVP/Poland](https://www.facebook.com/watch/?v=985620508469794)
+* [TVP/Poland](https://twitter.com/TygodnikTVP/status/1200727931418492939)
 
 **Sources**
 * [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
