@@ -2,7 +2,7 @@
 
 **Live demo** https://ebuddj.github.io/2019-bitcoin/
 
-## Bitcoin Value
+## Bitcoin Value over time
 
 Bitcoin is a cryptocurrency. It is a decentralized digital currency without a central bank or single administrator that can be sent from user to user on the peer-to-peer bitcoin network without the need for intermediaries. On 3 January 2009, the bitcoin network was created when Nakamoto mined the first block of the chain, known as the genesis block. In 2010, the first known commercial transaction using bitcoin occurred when programmer Laszlo Hanyecz bought two Papa John's pizzas for ₿10,000. 
 
