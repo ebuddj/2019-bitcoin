@@ -147,7 +147,14 @@ This data shows the value of Bitcoin from 2013-02-12. This is a force layout vis
 
 This data shows the value of Bitcoin since Bitcoin was introduced. This is a growing line chart.
 
-**Links**
+**Sources**
+* [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
+* [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_price_history_2009_to_2019)
+* [Wikipedia](https://en.wikipedia.org/wiki/Bitcoin)
+* [99Bitcoins](https://99bitcoins.com/bitcoin/historical-price/)  
+  * Data is in the `chartData` variable accessable via browser's console
+
+**EBU links**
 * [News Exchange](https://news-exchange.ebu.ch/item_detail/526f7da5a4979072d9b81df87f2f66c3/2019_21057414)
 * [Social Newswire](https://www.evnsocialnewswire.ch/editors-picks/data-visualisation-of-bitcoin-value-skyrocketing-over-the-course-of-its-existence-animation/)
 
@@ -155,13 +162,6 @@ This data shows the value of Bitcoin since Bitcoin was introduced. This is a gro
 * [DW/Germany](https://www.facebook.com/watch/?v=744776129264447)
 * [TVP/Poland](https://www.facebook.com/watch/?v=985620508469794)
 * [TVP/Poland](https://twitter.com/TygodnikTVP/status/1200727931418492939)
-
-**Sources**
-* [CoinMarketCap](https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20130428&end=20191029)
-* [BitcoinWiki](https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_price_history_2009_to_2019)
-* [Wikipedia](https://en.wikipedia.org/wiki/Bitcoin)
-* [99Bitcoins](https://99bitcoins.com/bitcoin/historical-price/)  
-  * Data is in the `chartData` variable accessable via browser's console
 
 ## How to use
 
@@ -171,7 +171,7 @@ This visualization is part of the EBU News Exchange’s Data Journalism project.
 
 ## Rights of usage
 
-The material may be used only by Eurovision active members and sub-licensees.
+The material may be used only by [Eurovision active members and sub-licensees](https://www.ebu.ch/eurovision-news/members-and-sublicensees).
 
 ## How to build and develop
 
